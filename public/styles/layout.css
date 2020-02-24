@@ -26,5 +26,12 @@ body {
 
 body {
   font-family: 'Source Sans Pro', 'sans-serif';
+  display: flex;
+  justify-content: center;
 }
 
+main {
+  position: absolute;
+  margin-top: 520px;
+  width: 90%;
+}
