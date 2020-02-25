@@ -1,4 +1,4 @@
-[value='Tweet'] {
+input[value='Tweet'] {
   background-color: #4056A1;
   border: none;
   font-family: Bungee, 'sans-serif';
@@ -35,4 +35,8 @@ span {
 
 section {
   width: 100%;
+}
+
+.over140 {
+  color: red;
 }
