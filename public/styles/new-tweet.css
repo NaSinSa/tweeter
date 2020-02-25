@@ -1,0 +1,39 @@
+[value='Tweet'] {
+  background-color: #4056A1;
+  border: none;
+  font-family: Bungee, 'sans-serif';
+  color: white;
+}
+
+textarea {
+  border: none;
+  border-bottom: solid;
+  background: no-repeat;
+  width: 100%;
+  font-family: 'Source Sans Pro', 'sans-serif';
+  margin-bottom: 10px;
+  resize: none;
+  height: 45px;
+}
+
+::placeholder {
+  font-weight: bold;
+  color: black;
+  font-size: 26px;
+}
+
+form {
+  display: flex;
+  align-content: space-around;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+span {
+  font-family: Bungee, 'sans-serif';
+
+}
+
+section {
+  width: 100%;
+}
