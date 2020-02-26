@@ -4,30 +4,11 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
-const data = [
-  {
-    "user": {
-      "name": "Newton",
-      "avatars": "https://i.imgur.com/73hZDYK.png"
-      ,
-      "handle": "@SirIsaac"
-    },
-    "content": {
-      "text": "If I have seen further it is by standing on the shoulders of giants"
-    },
-    "created_at": 1461116232227
-  },
-  {
-    "user": {
-      "name": "Descartes",
-      "avatars": "https://i.imgur.com/nlhLi3I.png",
-      "handle": "@rd" },
-    "content": {
-      "text": "Je pense , donc je suis"
-    },
-    "created_at": 1461113959088
-  }
-];
+
+const whenTheTweetIsPosted = function(nb) {
+  let days = Math.ceil((new Date() - nb) / 1000 / 60 / 60 / 24);
+  return `${days} days ago`
+};
 
 const renderTweets = function(tweets) {
 
@@ -78,15 +59,44 @@ const createTweetElement = function(tweet) {
     .append($pDays.text(obj.content.text))
     .append($footer)
   
-  return $('.tweet-container').append($tweet)
-  // return article;
+    return $('.tweet-container').prepend($tweet)
+    // return article;
+  };
+  
+  const loadTweets = function() {
+    $.ajax({
+      method: 'GET',
+      url: '/tweets',
+      success: function(data) {
+      renderTweets(data)
+    }
+  });
 };
 
 $(document).ready(function() {
-  renderTweets(data);
+
+  $('.tweeter').on('submit', function(event) {
+    event.preventDefault();
+    let tweet = $( this ).serialize();
+    if ($('textarea').val().length > 140) {
+      alert('The tweet is too long!');
+    } else if ($('textarea').val().length === 0) {
+      alert('You should tweet somthing!');
+    } else {
+      $.ajax({
+        method: 'POST',
+        url: '/tweets',
+        data: tweet,
+      })
+      .then((data) => {
+        loadTweets(data);
+        $('textarea').val("");
+      })
+    }
+  });
+  
+  $('nav div').on('click', function(event) {
+    $('.tweeter').toggleClass('hide');
+  })
 });
 
-const whenTheTweetIsPosted = function(nb) {
-  let days = Math.ceil((new Date() - nb) / 1000 / 60 / 60 / 24);
-  return `${days} days ago`
-}

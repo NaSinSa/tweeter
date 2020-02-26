@@ -40,3 +40,13 @@ section {
 .over140 {
   color: red;
 }
+
+.hide {
+  transition: all 1.5s ease-in-out;
+  height: 0;
+  display: none;
+}
+
+.hide:target {
+  height: auto;
+}
