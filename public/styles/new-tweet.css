@@ -41,12 +41,12 @@ section {
   color: red;
 }
 
-.hide {
+.slide {
   transition: all 1.5s ease-in-out;
   height: 0;
   display: none;
 }
 
-.hide:target {
+.slide:target {
   height: auto;
 }

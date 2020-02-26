@@ -96,7 +96,7 @@ $(document).ready(function() {
   });
   
   $('nav div').on('click', function(event) {
-    $('.tweeter').toggleClass('hide');
+    $('.tweeter').toggleClass('slide');
   })
 });
 
