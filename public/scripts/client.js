@@ -6,24 +6,33 @@
 
 
 const whenIsTheTweetPosted = function(nb) {
-  let inSecond = (new Date() - nb) / 1000;
+
+  const inSecond = (new Date() - nb) / 1000;
+
   if (inSecond < 60) {
+
     return `${Math.round(inSecond)} second${timeUnitPluralChecker(Math.round(inSecond))}ago`;
+
   } else if (inSecond / 60 < 60) {
+
     return `${Math.round(inSecond / 60)} minute${timeUnitPluralChecker(Math.round(inSecond / 60))}ago`;
+
   } else if (inSecond / 60 / 60 < 24) {
+
     return `${Math.round(inSecond / 60 / 60)} hour${timeUnitPluralChecker(Math.round(inSecond / 60 / 60))}ago`;
+
   } else {
+
     return `${Math.round(inSecond / 60 / 60 / 24)} day${timeUnitPluralChecker(Math.round(inSecond / 60 / 60 / 24))}ago`;
+
   }
+
 };
 
 const timeUnitPluralChecker = function(time) {
-  if (Math.round(time) > 1) {
-    return 's ';
-  } else {
-    return ' ';
-  }
+
+  return (Math.round(time) > 1) ? 's ' : ' ';
+
 };
 
 const renderTweets = function(tweets) {
@@ -31,39 +40,46 @@ const renderTweets = function(tweets) {
   for (let ele of tweets) {
     createTweetElement(ele);
   }
+
 };
 
 const createTweetElement = function(tweet) {
+
   let obj = tweet;
-  let keys = Object.keys(tweet);
 
   let $tweet = $('<article>');
   let $header = $('<header>');
   let $span = $('<span>').addClass('hide');
-  let $img = $('<img>', {src: obj.user.avatars});
+  let $avatarImg = $('<img>', {src: obj.user.avatars});
   let $h3 = $('<h3>');
   let $pTweet = $('<p>');
   let $pDays = $('<p>');
   let $footer = $('<footer>');
-  let $button = $('<button>')
+  let $pIcon = $('<p>')
+  let $tweetImg1 = $('<img>', {src: '/images/flag.png', height: '15px', width: '15px'});
+  let $tweetImg2 = $('<img>', {src: '/images/repeat.png', height: '15px', width: '15px'});
+  let $tweetImg3 = $('<img>', {src: '/images/heart.png', height: '15px', width: '15px'});
 
-  $button.text('icons');
   $span.text(obj.user.handle);
   $h3.text(obj.user.name);
-  $header.append($h3.prepend($img));
+  $header.append($h3.prepend($avatarImg));
   $header.append($span);
   $footer.append($pTweet.text(whenIsTheTweetPosted(obj.created_at)));
-  $footer.append($button);
+  $pIcon.append($tweetImg1, $tweetImg2, $tweetImg3);
+  $footer.append($pIcon);
+
   
   $tweet
     .append($header)
     .append($pDays.text(obj.content.text))
     .append($footer)
   
-  return $('.tweet-container').prepend($tweet)
+  return $('.tweet-container').prepend($tweet);
+
 };
   
 const loadTweets = function() {
+
   $.ajax({
     method: 'GET',
     url: '/tweets',
@@ -71,19 +87,27 @@ const loadTweets = function() {
       renderTweets(data);
     }
   });
+
 };
 
 $(document).ready(function() {
 
   $('.tweeter').on('submit', function(event) {
+
     event.preventDefault();
+
     let tweet = $( this ).serialize();
-    $('p[class="tweetErrorMsg"]').slideUp();
+
+    $('p[class="tweetErrorMsg"]').slideUp();        //cleaer an error msg slides in from func below
 
     if ($('textarea').val().length > 140) {
+
       $('p[name="tooLong"]').slideDown();
+    
     } else if ($('textarea').val().length === 0) {
+    
       $('p[name="noInput"]').slideToggle();
+    
     } else {
       $.ajax({
         method: 'POST',
@@ -92,16 +116,19 @@ $(document).ready(function() {
       })
       .then((data) => {
         loadTweets(data);
-        $('textarea').val("");
-        $('.counter').text('140');
+        $('textarea').val('');          // with a valid tweet input, the textarea will be empty
+        $('.counter').text('140');      // and the counter will be reset.
       });
     }
+
   });
   
-  $('nav div').on('click', function(event) {
-    $('.tweeter').slideToggle(()=>{
+  $('nav div').on('click', function(event) {      
+
+    $('.tweeter').slideToggle(()=>{         //a user will be ready to type without clicking the input field.
       $('textarea').focus();
     });
+
   })
 });
 
