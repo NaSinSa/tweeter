@@ -78,11 +78,13 @@ $(document).ready(function() {
   $('.tweeter').on('submit', function(event) {
     event.preventDefault();
     let tweet = $( this ).serialize();
+    $('p[class="tweetErrorMsg"]').slideUp();
     if ($('textarea').val().length > 140) {
-      alert('The tweet is too long!');
+      $('p[name="tooLong"]').slideDown();
     } else if ($('textarea').val().length === 0) {
-      alert('You should tweet somthing!');
+      $('p[name="noInput"]').slideToggle();
     } else {
+
       $.ajax({
         method: 'POST',
         url: '/tweets',
@@ -91,6 +93,7 @@ $(document).ready(function() {
       .then((data) => {
         loadTweets(data);
         $('textarea').val("");
+        $('.counter').text('140');
       })
     }
   });

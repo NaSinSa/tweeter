@@ -10,4 +10,16 @@ $(document).ready(function() {
     $(this).siblings('.counter').html(140 - tweetLength);
   });
 
+  $(window).on('scroll', function() {
+    if ($(window).scrollTop() !== 0) {
+      $('[name="toggleUpArrow"]').fadeIn('fast');
+      $('nav div').fadeOut('fast');
+    }
+  })
+
+  $('[name="toggleUpArrow"]').on('click', function() {
+    $(window).scrollTop(0)
+    $('[name="toggleUpArrow"]').fadeOut('fast');
+    $('nav div').fadeIn('fast');
+  })
 });

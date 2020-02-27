@@ -40,3 +40,14 @@ section {
 .over140 {
   color: red;
 }
+
+section.new-tweet p {
+  display: none;
+  border-style: solid;
+  border-color: red;
+  color: red;
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 50px;
+  text-align: center;
+}

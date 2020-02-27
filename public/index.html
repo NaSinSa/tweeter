@@ -51,6 +51,8 @@
     <!-- Page-specific (main) content here -->
     <main class="container">
       <section class="new-tweet">
+        <p class="tweetErrorMsg" name="tooLong">The tweet is too long!</p>
+        <p class="tweetErrorMsg" name="noInput">You should tweet something!</p>
         <form class="tweeter" action="/tweets" method="POST">
           <textarea name="text" placeholder="What are you humming about?"></textarea>
           <input type="submit" value="Tweet">
@@ -59,7 +61,7 @@
       </section>
       <section class="tweet-container">                  
       </section>      
-      
+      <img name='toggleUpArrow' src='/images/arrow up.png'>
     </main>
   </body>
 </html>
