@@ -27,12 +27,13 @@ body {
 body {
   font-family: 'Source Sans Pro', 'sans-serif';
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 main {
-  position: absolute;
-  margin-top: 520px;
+  margin-top: 0px;
   width: 90%;
   display: flex;
   justify-content: center;
@@ -46,4 +47,25 @@ main > img {
   right: 0;
   bottom: 0%;
   display: none;
+}
+
+
+@media screen and (min-width:1024px) {
+
+  body {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+
+  }
+
+  main {
+    margin-top: 200px;
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+
 }
