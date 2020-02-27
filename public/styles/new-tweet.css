@@ -40,13 +40,3 @@ section {
 .over140 {
   color: red;
 }
-
-.slide {
-  transition: all 1.5s ease-in-out;
-  height: 0;
-  display: none;
-}
-
-.slide:target {
-  height: auto;
-}

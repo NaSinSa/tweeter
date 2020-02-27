@@ -96,7 +96,9 @@ $(document).ready(function() {
   });
   
   $('nav div').on('click', function(event) {
-    $('.tweeter').toggleClass('slide');
+    $('.tweeter').slideToggle(()=>{
+      $('textarea').focus()
+    });
   })
 });
 
