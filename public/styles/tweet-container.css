@@ -6,7 +6,7 @@ article {
   padding-right: 12px;
 }
 
-article > p {
+article > body > p {
   border: none;
   font-family: 'Source Sans Pro', 'sans-serif';
   border-bottom: solid;
@@ -50,7 +50,6 @@ article .hide {
   color: thistle;
 }
 
-
 article:hover {
   box-shadow: 5px 20px thistle;
 }
@@ -59,3 +58,5 @@ article:hover .hide {
   visibility: visible;
   opacity: 100;
 }
+
+

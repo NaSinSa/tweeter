@@ -52,26 +52,28 @@ const createTweetElement = function(tweet) {
   let $span = $('<span>').addClass('hide');
   let $avatarImg = $('<img>', {src: obj.user.avatars});
   let $h3 = $('<h3>');
+  let $body = $('<body>');
   let $pTweet = $('<p>');
   let $pDays = $('<p>');
   let $footer = $('<footer>');
   let $pIcon = $('<p>')
-  let $tweetImg1 = $('<img>', {src: '/images/flag.png', height: '15px', width: '15px'});
-  let $tweetImg2 = $('<img>', {src: '/images/repeat.png', height: '15px', width: '15px'});
-  let $tweetImg3 = $('<img>', {src: '/images/heart.png', height: '15px', width: '15px'});
+  let $tweetImg1 = $('<img>', {src: '/images/flag.png', height: '15px', width: '15px', title: 'Flag', alt: 'Flag'});
+  let $tweetImg2 = $('<img>', {src: '/images/repeat.png', height: '15px', width: '15px', title: 'Re-tweet', alt: 'Re-tweet'});
+  let $tweetImg3 = $('<img>', {src: '/images/heart.png', height: '15px', width: '15px', title: 'Like', alt: 'Like'});
 
   $span.text(obj.user.handle);
   $h3.text(obj.user.name);
   $header.append($h3.prepend($avatarImg));
   $header.append($span);
-  $footer.append($pTweet.text(whenIsTheTweetPosted(obj.created_at)));
+  $body.append($pTweet.text(obj.content.text));
+  $footer.append($pDays.text(whenIsTheTweetPosted(obj.created_at)));
   $pIcon.append($tweetImg1, $tweetImg2, $tweetImg3);
   $footer.append($pIcon);
 
   
   $tweet
     .append($header)
-    .append($pDays.text(obj.content.text))
+    .append($body)
     .append($footer)
   
   return $('.tweet-container').prepend($tweet);
@@ -125,7 +127,7 @@ $(document).ready(function() {
   
   $('nav div').on('click', function(event) {      
 
-    $('.tweeter').slideToggle(()=>{         //a user will be ready to type without clicking the input field.
+    $('.new-tweet').slideToggle(()=>{         //a user will be ready to type without clicking the input field.
       $('textarea').focus();
     });
 
